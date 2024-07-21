@@ -1,7 +1,4 @@
-from typing import TypeVar
-
-
-SessionLike = TypeVar('SessionLike')
+from interfaces.type_vars import SessionLike
 
 
 class BaseRepository:

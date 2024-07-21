@@ -5,3 +5,7 @@ def sql_db_provider():
 
 def sql_db_uow_provider():
     raise NotImplementedError
+
+
+def main_uow_provider():
+    raise NotImplementedError
