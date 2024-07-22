@@ -4,11 +4,10 @@ from typing import Type
 from infrastructure.persistance.bases.repository import BaseRepository
 
 from interfaces.type_vars import SessionLike
-from interfaces.infrastructure.uow import IBaseCommonUOW
-from interfaces.infrastructure.main_uow import IMainUOW
+from interfaces.infrastructure.uow import IBaseCommonUOW, IBaseUOW
 
 
-class BaseUOW(IBaseCommonUOW, ABC):
+class BaseCommonUOW(IBaseCommonUOW, ABC):
     """
     Adding repos like:
     <repo_name>: Annotated[<repo_class>, <*args_to_provide>]
@@ -28,7 +27,7 @@ class BaseUOW(IBaseCommonUOW, ABC):
                 setattr(self, name, _class(self.dl_connector))
 
 
-class BaseMainUOW(IMainUOW, ABC):
+class BaseMainUOW(IBaseUOW, ABC):
     def __init__(self, **common_uow_instances):
         self._uows = []
         self.__init_uows(instances=common_uow_instances)
@@ -40,6 +39,7 @@ class BaseMainUOW(IMainUOW, ABC):
             if inst := instances.get(name):
                 if isinstance(inst, _class):
                     setattr(self, name, inst)
+                    self._uows.append(inst)
 
     async def commit(self):
         for uow in self._uows:
