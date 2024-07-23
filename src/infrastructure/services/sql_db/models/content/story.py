@@ -8,7 +8,7 @@ from uuid_extensions import uuid7str
 from infrastructure.services.sql_db.models.many_to_many.story_tags import story_to_tags_association_table
 
 
-class Story(BaseModel):
+class StoryDB(BaseModel):
     __tablename__ = 'story'
 
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid7str)
@@ -19,7 +19,7 @@ class Story(BaseModel):
     text: Mapped[str] = mapped_column(nullable=False)
 
     tags = relationship(
-        "Tag",
+        "TagDB",
         secondary=story_to_tags_association_table,
         back_populates="stories"
     )

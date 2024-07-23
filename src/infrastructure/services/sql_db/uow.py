@@ -3,10 +3,12 @@ from infrastructure.persistance.bases.uow import BaseCommonUOW
 from infrastructure.services.sql_db.repositories.auth_repository.query import UserQueryRepository
 from infrastructure.services.sql_db.repositories.auth_repository.command import UserCommandRepository
 from typing import Annotated
+from interfaces.infrastructure.uows.sql_db import IDBUoW
 
 
-class DbUOW(BaseCommonUOW):
+class DbUOW(BaseCommonUOW, IDBUoW):
 
+    # TODO change repo creation like just annotation
     user_q_rep: Annotated[UserQueryRepository, None]
     user_c_rep: Annotated[UserCommandRepository, None]
 

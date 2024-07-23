@@ -6,5 +6,5 @@ def _bind_auth(app: FastAPI) -> None:
     app.include_router(auth_router, tags=['Auth'])
 
 
-def api_binder(app: FastAPI) -> None:
+def binder_routers(app: FastAPI) -> None:
     _bind_auth(app)

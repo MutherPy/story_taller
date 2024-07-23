@@ -1,14 +1,20 @@
 from infrastructure.persistance.bases.repository import BaseRepository
 
-from sqlalchemy import select
+from infrastructure.services.sql_db.models.users.user import UserDB
+from interfaces.infrastructure.repositories.command.user import IUserCommandRepository
+from application.mappers.auth.auth_mapper import AuthMapper
 
-from infrastructure.services.sql_db.models.users.user import User
 
+class UserCommandRepository(BaseRepository, IUserCommandRepository):
 
-class UserCommandRepository(BaseRepository):
-    async def create_user(self, username, password, email):
-        user = User(username=username, email=email, password=password)
+    auth_mapper = AuthMapper
+
+    async def create_new_user(self, username: str, password: str, email: str):
+        userdb = await self._create(username=username, password=password, email=email)
+        return self.auth_mapper.user_db__to__registered_user_dto(userdb=userdb)
+
+    async def _create(self, username: str, password: str, email: str):
+        user = UserDB(username=username, email=email, password=password)
         self.dl_connector.add(user)
         await self.dl_connector.flush()
-        return user.id
-
+        return user

@@ -7,7 +7,7 @@ from application.usecases.auth.registration import RegistrationUseCase
 
 
 class AuthFacade(BaseUseCaseFacade, IAuthFacade):
-    async def login_user(self, username, password):
+    async def login_user(self, username, password) -> str:
         return await LogInUseCase(self.uow)(username, password)
 
     async def logout_user(self, token):
