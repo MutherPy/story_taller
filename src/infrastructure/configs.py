@@ -6,8 +6,8 @@ class SQLDBSettings(BaseSettings):
     USER: str = Field(default='user', alias='POSTGRES_USER')
     PASSWORD: str = Field(default='password', alias='POSTGRES_PASSWORD')
     DB: str = Field(default='db', alias='POSTGRES_DB')
-    HOST: str = 'localhost'
-    PORT: int = 5432
+    HOST: str = Field(default='localhost', alias='POSTGRES_HOST')
+    PORT: int = Field(default=5432, alias='POSTGRES_PORT')
     DISABLE_POOL: bool = True
 
     DRIVER: str = 'postgresql+asyncpg'

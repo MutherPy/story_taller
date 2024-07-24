@@ -94,7 +94,15 @@ def run_migrations_online() -> None:
     and associate a connection with the context.
 
     """
-    asyncio.run(run_async_migrations())
+    from time import sleep
+    tries = 4
+    while tries:
+        try:
+            asyncio.run(run_async_migrations())
+            return
+        except Exception:
+            sleep(2)
+            tries -= 1
 
 
 if context.is_offline_mode():
