@@ -1,4 +1,16 @@
 services:
+  app:
+    container_name: story_taller
+    build:
+      dockerfile: Dockerfile
+      context: .
+    env_file:
+      - .env
+    volumes:
+      - ./src/:/src
+    command: python main.py
+    ports:
+      - "8000:8000"
   test_db:
     image: postgres:15
     container_name: story_taller_db

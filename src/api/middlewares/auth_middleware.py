@@ -8,7 +8,7 @@ from infrastructure.services.auth.id_provider import IdentityProvider
 
 
 class AuthMiddleware:
-    def __init__(self, app: ASGIApp, public_paths: list[str], tst) -> None:
+    def __init__(self, app: ASGIApp, public_paths: list[str]) -> None:
         self.app = app
         self.public_paths = ['/docs', '/openapi.json']
         self.public_paths.extend(public_paths)
