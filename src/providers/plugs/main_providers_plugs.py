@@ -1,2 +1,2 @@
-def auth_facade_provider():
+def main_uow_provider():
     raise NotImplementedError

@@ -4,15 +4,16 @@ from fastapi.responses import JSONResponse
 
 from api.representers.request.enter_exit.request import LoginUserRequestRepresenter
 from api.representers.response.enter_exit.response import TokenResponseRepresenter
-from providers.plugs.facades.auth import auth_facade_provider
-from interfaces.application.facades.auth_facade import IAuthFacade
+from application.facades.auth.auth_facade import AuthFacade
+from providers.plugs.main_providers_plugs import main_uow_provider
 
 
 @auth_router.post('/login', responses={200: {'model': TokenResponseRepresenter}, 401: {}})
 async def login(
         login_data: LoginUserRequestRepresenter,
-        auth_facade: IAuthFacade = Depends(auth_facade_provider)
+        main_uow=Depends(main_uow_provider)
 ):
+    auth_facade = AuthFacade(uow=main_uow)
     token = await auth_facade.login_user(username=login_data.username, password=login_data.password)
     if token:
         response = JSONResponse(content=TokenResponseRepresenter(token=token).model_dump())

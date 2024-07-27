@@ -5,15 +5,16 @@ from fastapi import Depends
 
 from api.representers.request.enter_exit.request import RegistrationUserRequestRepresenter
 from api.representers.response.enter_exit.response import TokenResponseRepresenter
-from providers.plugs.facades.auth import auth_facade_provider
-from interfaces.application.facades.auth_facade import IAuthFacade
+from application.facades.auth.auth_facade import AuthFacade
+from providers.plugs.main_providers_plugs import main_uow_provider
 
 
 # TODO add exceptions handling if user already exists
 @auth_router.post('/signup', responses={200: {'model': TokenResponseRepresenter}})
 async def signup(
         registration_data: RegistrationUserRequestRepresenter,
-        auth_facade: IAuthFacade = Depends(auth_facade_provider)
+        main_uow=Depends(main_uow_provider)
 ):
+    auth_facade = AuthFacade(uow=main_uow)
     token = await auth_facade.register_user(**registration_data.dict())
     return TokenResponseRepresenter(token=token)

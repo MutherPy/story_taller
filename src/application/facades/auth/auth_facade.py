@@ -1,12 +1,11 @@
 from application.bases.base_facade import BaseUseCaseFacade
-from interfaces.application.facades.auth_facade import IAuthFacade
 
 
 from application.usecases.auth.login import LogInUseCase, LogOutUseCase
 from application.usecases.auth.registration import RegistrationUseCase
 
 
-class AuthFacade(BaseUseCaseFacade, IAuthFacade):
+class AuthFacade(BaseUseCaseFacade):
     async def login_user(self, username, password) -> str:
         return await LogInUseCase(self.uow)(username, password)
 
