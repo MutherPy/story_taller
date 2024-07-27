@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from api.controllers import auth_router
+from api.controllers.routers import auth_router
 
 
 def _bind_auth(app: FastAPI) -> None:

@@ -1,5 +1,4 @@
-
-from api.controllers.enter_exit.router import auth_router
+from api.controllers.routers import auth_router
 
 from fastapi import Depends
 
