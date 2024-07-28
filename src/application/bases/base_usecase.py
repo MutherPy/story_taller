@@ -1,11 +1,11 @@
-from interfaces.infrastructure.main_uow import IMainUOW
+from infrastructure.persistance.main_uow import MainUOW
 
 
 class BaseUseCase:
-    uow: IMainUOW
+    uow: MainUOW
 
-    def __init__(self, uow: IMainUOW):
-        self.uow: IMainUOW = uow
+    def __init__(self, uow: MainUOW):
+        self.uow: MainUOW = uow
 
     async def __call__(self, *args, **kwargs):
         raise NotImplementedError

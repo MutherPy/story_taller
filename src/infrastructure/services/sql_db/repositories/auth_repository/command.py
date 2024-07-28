@@ -7,7 +7,7 @@ from application.mappers.auth.auth_mapper import AuthMapper
 
 class UserCommandRepository(BaseRepository, IUserCommandRepository):
 
-    auth_mapper = AuthMapper
+    auth_mapper: AuthMapper
 
     async def create_new_user(self, username: str, password: str, email: str):
         userdb = await self._create(username=username, password=password, email=email)

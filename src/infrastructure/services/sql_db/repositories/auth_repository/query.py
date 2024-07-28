@@ -12,7 +12,7 @@ from interfaces.infrastructure.repositories.query.user import IUserQueryReposito
 
 class UserQueryRepository(BaseRepository, IUserQueryRepository):
 
-    auth_mapper = AuthMapper
+    auth_mapper: AuthMapper
 
     async def retrieve_by_username(self, username) -> Optional[LoginUserDTO]:
         stmt = select(UserDB).where(UserDB.username == username)

@@ -17,4 +17,5 @@ if __name__ == "__main__":
         port=LoadedConfig.api.PORT,
         log_level=LoadedConfig.api.ASGI_LOG_LEVEL,
         reload=True,
+        reload_includes='*.py'
     )
