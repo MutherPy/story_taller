@@ -3,7 +3,7 @@ from infrastructure.persistance.bases.repository import BaseRepository
 from infrastructure.services.sql_db.models.common.tag import TagDB
 from sqlalchemy import select
 
-from application.dto.tags.query import TagDTO
+from application.dto.tags.tags import TagDTO
 
 
 class TagsQueryRepository(BaseRepository):

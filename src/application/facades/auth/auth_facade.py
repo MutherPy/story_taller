@@ -1,8 +1,7 @@
 from application.bases.base_facade import BaseUseCaseFacade
 
 
-from application.usecases.auth.login import LogInUseCase
-from application.usecases.auth.registration import RegistrationUseCase
+from application.usecases.auth.auth import LogInUseCase, RegistrationUseCase
 
 
 class AuthFacade(BaseUseCaseFacade):

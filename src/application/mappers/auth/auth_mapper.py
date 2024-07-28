@@ -1,7 +1,6 @@
 from application.bases.base_mapper import BaseMapper
 
-from application.dto.auth.login import LoginUserDTO
-from application.dto.auth.registration import RegisteredUserDTO
+from application.dto.auth.auth import LoginUserDTO, RegisteredUserDTO
 from infrastructure.services.sql_db.models.users.user import UserDB
 
 

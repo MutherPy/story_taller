@@ -1,5 +1,10 @@
 from application.bases.base_usecase import BaseUseCase
-from application.dto.tags.query import TagDTO
+from application.dto.tags.tags import TagDTO
+
+
+class ListTag(BaseUseCase):
+    async def __call__(self):
+        return await self.uow.db.tags_q_rep.get_all_tags()
 
 
 class CreateTag(BaseUseCase):
@@ -11,4 +16,5 @@ class CreateTag(BaseUseCase):
         except Exception:
             await self.uow.rollback()
             raise
+
 

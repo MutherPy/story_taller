@@ -1,6 +1,6 @@
 from application.bases.base_mapper import BaseMapper
 from infrastructure.services.sql_db.models.common.tag import TagDB
-from application.dto.tags.query import TagDTO
+from application.dto.tags.tags import TagDTO
 
 
 class TagsMapper(BaseMapper):

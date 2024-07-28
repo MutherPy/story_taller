@@ -1,6 +1,6 @@
 from application.mappers.tags_mapper import TagsMapper
 from infrastructure.persistance.bases.repository import BaseRepository
-from application.dto.tags.query import TagDTO
+from application.dto.tags.tags import TagDTO
 from infrastructure.services.sql_db.models.common.tag import TagDB
 
 
