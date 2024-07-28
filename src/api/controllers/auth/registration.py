@@ -2,8 +2,8 @@ from api.controllers.routers import auth_router
 
 from fastapi import Depends
 
-from api.representers.request.enter_exit.request import RegistrationUserRequestRepresenter
-from api.representers.response.enter_exit.response import TokenResponseRepresenter
+from api.representers.request.auth.request import RegistrationUserRequestRepresenter
+from api.representers.response.auth.response import TokenResponseRepresenter
 from application.facades.auth.auth_facade import AuthFacade
 from providers.plugs.main_providers_plugs import main_uow_provider
 

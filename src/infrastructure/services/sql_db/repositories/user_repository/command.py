@@ -1,11 +1,10 @@
 from infrastructure.persistance.bases.repository import BaseRepository
 
 from infrastructure.services.sql_db.models.users.user import UserDB
-from interfaces.infrastructure.repositories.command.user import IUserCommandRepository
 from application.mappers.auth.auth_mapper import AuthMapper
 
 
-class UserCommandRepository(BaseRepository, IUserCommandRepository):
+class UserCommandRepository(BaseRepository):
 
     auth_mapper: AuthMapper
 

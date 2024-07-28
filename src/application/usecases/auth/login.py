@@ -6,14 +6,9 @@ from typing import Optional
 
 class LogInUseCase(BaseUseCase):
     async def __call__(self, username: str, password: str) -> str:
-        user: Optional[LoginUserDTO] = await self.uow.db.user_q_rep.retrieve_by_username(username=username)
+        user_dto: Optional[LoginUserDTO] = await self.uow.db.user_q_rep.retrieve_by_username(username=username)
         token: Optional[str] = None
-        if user:
-            if validator.PasswordsService.validate_password(password=password, storing_password=user.password):
-                token = id_provider.IdentityProvider.create_token({'user': username})
+        if user_dto:
+            if validator.PasswordsService.validate_password(password=password, storing_password=user_dto.password):
+                token = id_provider.IdentityProvider.create_token({'user': user_dto.username})
         return token
-
-
-class LogOutUseCase(BaseUseCase):
-    async def __call__(self, token: str):
-        ...

@@ -7,10 +7,9 @@ from infrastructure.services.sql_db.models.users.user import UserDB
 
 from application.mappers.auth.auth_mapper import AuthMapper
 from application.dto.auth.login import LoginUserDTO
-from interfaces.infrastructure.repositories.query.user import IUserQueryRepository
 
 
-class UserQueryRepository(BaseRepository, IUserQueryRepository):
+class UserQueryRepository(BaseRepository):
 
     auth_mapper: AuthMapper
 
