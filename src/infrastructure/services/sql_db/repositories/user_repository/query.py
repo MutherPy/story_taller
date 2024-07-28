@@ -5,7 +5,7 @@ from sqlalchemy import select
 from infrastructure.persistance.bases.repository import BaseRepository
 from infrastructure.services.sql_db.models.users.user import UserDB
 
-from application.mappers.auth.auth_mapper import AuthMapper
+from application.mappers.auth_mapper import AuthMapper
 from application.dto.auth.auth import LoginUserDTO
 
 

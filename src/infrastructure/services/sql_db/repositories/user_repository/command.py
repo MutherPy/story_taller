@@ -1,7 +1,7 @@
 from infrastructure.persistance.bases.repository import BaseRepository
 
 from infrastructure.services.sql_db.models.users.user import UserDB
-from application.mappers.auth.auth_mapper import AuthMapper
+from application.mappers.auth_mapper import AuthMapper
 
 
 class UserCommandRepository(BaseRepository):

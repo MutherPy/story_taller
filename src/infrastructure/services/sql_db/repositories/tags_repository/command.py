@@ -1,11 +1,11 @@
-from application.mappers.tags_mapper import TagsMapper
+from application.mappers.tags_mapper import TagsDBDTOMapper
 from infrastructure.persistance.bases.repository import BaseRepository
 from application.dto.tags.tags import TagDTO
 from infrastructure.services.sql_db.models.common.tag import TagDB
 
 
 class TagsCommandRepository(BaseRepository):
-    tags_mapper: TagsMapper
+    tags_mapper: TagsDBDTOMapper
 
     async def create(self, tag_title: str) -> TagDTO:
         new_tag_db = TagDB(title=tag_title)

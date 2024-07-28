@@ -3,7 +3,7 @@ from infrastructure.services.sql_db.models.common.tag import TagDB
 from application.dto.tags.tags import TagDTO
 
 
-class TagsMapper(BaseMapper):
+class TagsDBDTOMapper(BaseMapper):
 
     @staticmethod
     def tag_db__to__tag_dto(tag_db: TagDB) -> TagDTO:
@@ -15,5 +15,5 @@ class TagsMapper(BaseMapper):
             return []
         result = []
         for tag_db in tags_db:
-            result.append(TagsMapper.tag_db__to__tag_dto(tag_db))
+            result.append(TagsDBDTOMapper.tag_db__to__tag_dto(tag_db))
         return result
