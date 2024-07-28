@@ -1,6 +1,5 @@
 from pydantic import BaseModel
 
 
-class TagDTO(BaseModel):
-    id: int
+class TagCreationRequestRepresenter(BaseModel):
     title: str

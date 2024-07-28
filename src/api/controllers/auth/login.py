@@ -2,8 +2,8 @@ from api.controllers.routers import auth_router
 from fastapi import Depends
 from fastapi.responses import JSONResponse
 
-from api.representers.request.auth.request import LoginUserRequestRepresenter
-from api.representers.response.auth.response import TokenResponseRepresenter
+from api.representers.request.auth.auth import LoginUserRequestRepresenter
+from api.representers.response.auth.auth import TokenResponseRepresenter
 from application.facades.auth.auth_facade import AuthFacade
 from providers.plugs.main_providers_plugs import main_uow_provider
 
