@@ -1,2 +1,2 @@
 import api.controllers.auth.login
-import api.controllers.auth.registration
+import api.controllers.auth.signup

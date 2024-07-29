@@ -4,14 +4,18 @@ from providers.plugs.infrastructure_common_plugs import (
     sql_db_provider,
     sql_db_uow_provider,
 )
-from providers.plugs.main_providers_plugs import main_uow_provider
+from providers.plugs.main_providers_plugs import (
+    main_uow_provider,
+)
 
 
 from providers.implementations.infrastructure_common_impl import (
     get_sql_db_provider,
     get_sql_db_uow_provider,
 )
-from providers.implementations.main_providers_impl import get_main_uow_provider
+from providers.implementations.main_providers_impl import (
+    get_main_uow_provider,
+)
 
 
 def _bind_infra_common_providers(app: FastAPI) -> None:

@@ -5,6 +5,8 @@ from starlette.responses import Response
 from starlette.types import ASGIApp, Receive, Scope, Send
 
 from infrastructure.services.auth.id_provider import IdentityProvider
+from fastapi.requests import Request
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
 
 class AuthMiddleware:
@@ -30,11 +32,17 @@ class AuthMiddleware:
                     await self.app(scope, receive, send)
                     return
 
-        token = conn.headers.get('Authorization')
+        sec = HTTPBearer(auto_error=False)
+        data: HTTPAuthorizationCredentials = await sec(conn)
 
-        if not token or not IdentityProvider.validate_token(token):
+        if not data or not data.credentials or not IdentityProvider.validate_token(data.credentials):
             r = Response(status_code=HTTPStatus.UNAUTHORIZED)
             await r(scope, receive, send)
             return
 
         await self.app(scope, receive, send)
+
+
+async def get_user_id(request: Request, call_next):
+    response = await call_next(request)
+    return response

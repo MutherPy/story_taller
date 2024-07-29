@@ -1,0 +1,18 @@
+
+from api.controllers.routers import user_router
+from fastapi import Depends
+from fastapi.security.http import HTTPAuthorizationCredentials
+
+from api.representers.request.users.tags import UserAddTagsRequestRepresenter
+from providers.plugs.main_providers_plugs import main_uow_provider
+from application.facades.users.users_facade import UsersFacade
+
+
+@user_router.post('/user/add_tags', responses={200: {"model": bool}, 401: {}})
+async def add_user_tags(
+        adding_tags: UserAddTagsRequestRepresenter,
+        uow=Depends(main_uow_provider)
+):
+    # users_facade = UsersFacade(uow=uow)
+    # is_added: bool = await users_facade.add_tags(user_id=user_id, tags_to_add=adding_tags.tags)
+    return True

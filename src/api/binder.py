@@ -1,6 +1,7 @@
-from fastapi import FastAPI
-from api.controllers.routers import auth_router, tags_router
-from api.middlewares.auth_middleware import AuthMiddleware
+from fastapi import FastAPI, Depends
+from fastapi.security import HTTPBearer
+from api.controllers.routers import auth_router, tags_router, user_router
+from api.middlewares.auth_middleware import AuthMiddleware, get_user_id
 from fastapi import APIRouter
 
 
@@ -9,8 +10,10 @@ def _bind_auth(app: FastAPI) -> None:
 
 
 def _bind_api(app: FastAPI) -> None:
-    api = APIRouter(prefix='/api')
+    sec = HTTPBearer()
+    api = APIRouter(prefix='/api', dependencies=[Depends(sec)])
     api.include_router(tags_router, tags=['Tags'])
+    api.include_router(user_router, tags=['Users'])
     app.include_router(api)
 
 
@@ -24,3 +27,4 @@ def bind_middlewares(app: FastAPI):
         AuthMiddleware,
         public_paths=['/login', '/signup']
     )
+    app.middleware('http')(get_user_id)

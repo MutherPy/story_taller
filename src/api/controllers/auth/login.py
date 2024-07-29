@@ -16,7 +16,7 @@ async def login(
     auth_facade = AuthFacade(uow=main_uow)
     token = await auth_facade.login_user(username=login_data.username, password=login_data.password)
     if token:
-        response = JSONResponse(content=TokenResponseRepresenter(token=token).model_dump())
+        response = TokenResponseRepresenter(token=token)
     else:
         response = JSONResponse(content=None, status_code=401)
     return response
