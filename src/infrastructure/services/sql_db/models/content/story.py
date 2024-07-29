@@ -5,7 +5,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from uuid import UUID
 from uuid_extensions import uuid7str
 
-from infrastructure.services.sql_db.models.many_to_many.story_tags import story_to_tags_association_table
+from infrastructure.services.sql_db.models.many_to_many.stories_tags import story_to_tags_association_table
 
 
 class StoryDB(BaseModel):

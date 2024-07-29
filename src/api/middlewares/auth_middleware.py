@@ -5,7 +5,6 @@ from starlette.responses import Response
 from starlette.types import ASGIApp, Receive, Scope, Send
 
 from infrastructure.services.auth.id_provider import IdentityProvider
-from fastapi.requests import Request
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
 
@@ -42,7 +41,3 @@ class AuthMiddleware:
 
         await self.app(scope, receive, send)
 
-
-async def get_user_id(request: Request, call_next):
-    response = await call_next(request)
-    return response

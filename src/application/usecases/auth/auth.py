@@ -1,6 +1,6 @@
 from application.bases.base_usecase import BaseUseCase
 from infrastructure.services.auth import validator, id_provider
-from application.dto.auth.auth import LoginUserDTO, RegisteredUserDTO
+from application.dto.auth.auth import LoginUserDTO, RegisteredUserDTO, TokenDataDTO
 from typing import Optional
 
 
@@ -10,7 +10,8 @@ class LogInUseCase(BaseUseCase):
         token: Optional[str] = None
         if user_dto:
             if validator.PasswordsService.validate_password(password=password, storing_password=user_dto.password):
-                token = id_provider.IdentityProvider.create_token({'user': user_dto.username})
+                token_data = TokenDataDTO(username=user_dto.username)
+                token = id_provider.IdentityProvider.create_token(token_data)
         return token
 
 
@@ -27,5 +28,5 @@ class RegistrationUseCase(BaseUseCase):
         except Exception:
             await self.uow.rollback()
             raise
-        return id_provider.IdentityProvider.create_token({'user': registered_user_dto.username, 'new': True})
-
+        token_data = TokenDataDTO(username=registered_user_dto.username, new=True)
+        return id_provider.IdentityProvider.create_token(token_data)

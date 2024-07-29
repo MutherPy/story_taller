@@ -3,6 +3,8 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from uuid import UUID
 from uuid_extensions import uuid7str
 
+from infrastructure.services.sql_db.models.many_to_many.users_tags import users_to_tags_association_table
+
 
 class UserDB(BaseModel):
     __tablename__ = 'user'
@@ -17,3 +19,10 @@ class UserDB(BaseModel):
     password: Mapped[str] = mapped_column(nullable=False)
 
     stories = relationship("StoryDB")
+
+    tags = relationship(
+        "TagDB",
+        secondary=users_to_tags_association_table,
+        back_populates="users",
+        lazy="selectin"  # https://stackoverflow.com/questions/74252768/missinggreenlet-greenlet-spawn-has-not-been-called
+    )
