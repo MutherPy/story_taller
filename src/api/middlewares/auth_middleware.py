@@ -34,6 +34,8 @@ class AuthMiddleware:
         sec = HTTPBearer(auto_error=False)
         data: HTTPAuthorizationCredentials = await sec(conn)
 
+        # TODO add personalizating token. Check if correct user inside
+
         if not data or not data.credentials or not IdentityProvider.validate_token(data.credentials):
             r = Response(status_code=HTTPStatus.UNAUTHORIZED)
             await r(scope, receive, send)
