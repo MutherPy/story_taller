@@ -21,5 +21,6 @@ class TagDB(BaseModel):
     users = relationship(
         "UserDB",
         secondary=users_to_tags_association_table,
-        back_populates="tags"
+        back_populates="tags",
+        lazy="selectin"
     )

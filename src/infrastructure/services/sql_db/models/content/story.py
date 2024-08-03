@@ -21,5 +21,6 @@ class StoryDB(BaseModel):
     tags = relationship(
         "TagDB",
         secondary=story_to_tags_association_table,
-        back_populates="stories"
+        back_populates="stories",
+        lazy="selectin"
     )

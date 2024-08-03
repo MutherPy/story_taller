@@ -18,3 +18,6 @@ class CreateTag(BaseUseCase):
             raise
 
 
+class UserTags(BaseUseCase):
+    async def __call__(self, user_id):
+        return await self.uow.db.tags_q_rep.get_user_tags(user_id=user_id)

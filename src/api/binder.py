@@ -1,6 +1,11 @@
 from fastapi import FastAPI, Depends
 from fastapi.security import HTTPBearer
-from api.controllers.routers import auth_router, tags_router, user_router
+from api.controllers.routers import (
+    auth_router,
+    tags_router,
+    user_router,
+    stories_router,
+)
 from api.middlewares.auth_middleware import AuthMiddleware
 from fastapi import APIRouter
 
@@ -10,10 +15,12 @@ def _bind_auth(app: FastAPI) -> None:
 
 
 def _bind_api(app: FastAPI) -> None:
-    sec = HTTPBearer()
-    api = APIRouter(prefix='/api', dependencies=[Depends(sec)])
+    # sec = HTTPBearer()
+    # api = APIRouter(prefix='/api', dependencies=[Depends(sec)])
+    api = APIRouter(prefix='/api')
     api.include_router(tags_router, tags=['Tags'])
     api.include_router(user_router, tags=['Users'])
+    api.include_router(stories_router, tags=['Stories'])
     app.include_router(api)
 
 
