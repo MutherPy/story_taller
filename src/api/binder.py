@@ -15,9 +15,8 @@ def _bind_auth(app: FastAPI) -> None:
 
 
 def _bind_api(app: FastAPI) -> None:
-    # sec = HTTPBearer()
-    # api = APIRouter(prefix='/api', dependencies=[Depends(sec)])
-    api = APIRouter(prefix='/api')
+    sec = HTTPBearer()
+    api = APIRouter(prefix='/api', dependencies=[Depends(sec)])
     api.include_router(tags_router, tags=['Tags'])
     api.include_router(user_router, tags=['Users'])
     api.include_router(stories_router, tags=['Stories'])
