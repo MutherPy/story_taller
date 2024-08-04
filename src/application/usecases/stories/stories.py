@@ -18,8 +18,8 @@ class CreateStory(BaseUseCase):
 
 
 class ListStoriesForUser(BaseUseCase):
-    async def __call__(self, user_id):
-        result = await self.uow.db.story_q_rep.get_user_stories(user_id=user_id)
+    async def __call__(self, user_id, tags_ids):
+        result = await self.uow.db.story_q_rep.get_user_stories(user_id=user_id, tags_ids=tags_ids)
         return result
 
 

@@ -5,6 +5,7 @@ from fastapi import Depends
 from api.controllers.routers import stories_router
 from api.representers.response.stories.stories import StoryListResponseRepresenter, StoryRetrieveResponseRepresenter
 from application.dto.stories.stories import StoryDTOList, StoryDTORetrieve
+from application.filters.stories_filter import StoriesTagsListFilter
 from providers.plugs.main_providers_plugs import main_uow_provider
 from application.facades.stories.stories_facade import StoriesFacade
 
@@ -16,11 +17,12 @@ from api.mappers.stories_mapper import StoryDTORepresenterMapper
 
 @stories_router.get('/story', responses={201: {'model': StoryListResponseRepresenter}, 401: {}})
 async def stories_list(
+        tags_ids: StoriesTagsListFilter = Depends(),
         user_id=Depends(current_user),
         uow=Depends(main_uow_provider)
 ):
     story_facade = StoriesFacade(uow=uow)
-    stories_dto: list[StoryDTOList] = (await story_facade.stories_for_user(user_id=user_id.id))
+    stories_dto: list[StoryDTOList] = (await story_facade.stories_for_user(user_id=user_id.id, tags_ids=tags_ids))
     result = StoryDTORepresenterMapper.list__story_dto_list__to__story_list(stories_dto=stories_dto)
     return result
 
