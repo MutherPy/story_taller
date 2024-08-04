@@ -3,7 +3,7 @@ from application.bases.base_mapper import BaseMapper
 from infrastructure.services.sql_db.models.content.story import StoryDB
 from application.dto.stories.stories import StoryDTORetrieve, StoryDTOList
 
-from application.mappers.tags_mapper import TagsDBDTOMapper
+from application.mappers.users_mapper import UserDBDTOMapper
 
 
 class StoryDBDTOMapper(BaseMapper):
@@ -21,8 +21,7 @@ class StoryDBDTOMapper(BaseMapper):
         return StoryDTOList(
             id=story_db.id,
             title=story_db.title,
-            text=story_db.text,
-            tags=TagsDBDTOMapper.list__tag_db__to__tag_dto(story_db.tags)
+            author=UserDBDTOMapper.user_db__to__author_dto(story_db.author)
         )
 
     @staticmethod

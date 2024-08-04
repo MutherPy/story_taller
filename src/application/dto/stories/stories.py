@@ -3,14 +3,15 @@ from pydantic import BaseModel
 from uuid import UUID
 
 from application.dto.tags.tags import TagDTO
+from application.dto.users.users import UserDTO
 
 
 class StoryDTOList(BaseModel):
     id: UUID
     title: str
-    text: str
+    author: UserDTO
 
 
 class StoryDTORetrieve(StoryDTOList):
+    text: str
     tags: list[TagDTO]
-

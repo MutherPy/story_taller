@@ -18,7 +18,7 @@ class UserDB(BaseModel):
     email: Mapped[str] = mapped_column(nullable=False, unique=True)
     password: Mapped[str] = mapped_column(nullable=False)
 
-    stories = relationship("StoryDB")
+    stories = relationship("StoryDB", back_populates='author')
 
     tags = relationship(
         "TagDB",

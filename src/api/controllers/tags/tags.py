@@ -14,7 +14,7 @@ from api.mappers.tags_mapper import TagDTORepresenterMapper
 async def tags_list(uow=Depends(main_uow_provider)):
     tags_facade = TagsFacade(uow=uow)
     tags_list_result = (await tags_facade.list())
-    result = TagDTORepresenterMapper.list__tag_dto__to__tag(tags_list_result)
+    result = TagDTORepresenterMapper.list__tag_dto__to__tags_list(tags_list_result)
     return result
 
 
@@ -26,9 +26,9 @@ async def tag_create(tag_name: TagCreationRequestRepresenter, uow=Depends(main_u
 
 
 @tags_router.get('/tag/user', responses={200: {'model': TagListResponseRepresenter}, 401: {}})
-async def tag_for_user(user_id=Depends(current_user), uow=Depends(main_uow_provider)):
+async def tags_for_user(user_id=Depends(current_user), uow=Depends(main_uow_provider)):
     tags_facade = TagsFacade(uow=uow)
     tags_list_result = (await tags_facade.user_tags(user_id=user_id.id))
-    result = TagDTORepresenterMapper.list__tag_dto__to__tag(tags_list_result)
+    result = TagDTORepresenterMapper.list__tag_dto__to__tags_list(tags_list_result)
     return result
 

@@ -8,7 +8,6 @@ from application.facades.auth.auth_facade import AuthFacade
 from providers.plugs.main_providers_plugs import main_uow_provider
 
 
-# TODO add exceptions handling if user already exists
 @auth_router.post('/signup', responses={200: {'model': TokenResponseRepresenter}})
 async def signup(
         registration_data: RegistrationUserRequestRepresenter,

@@ -9,8 +9,15 @@ class TagDTORepresenterMapper(BaseMapper):
         return TagResponseRepresenter(id=tag.id, title=tag.title)
 
     @staticmethod
-    def list__tag_dto__to__tag(tag_list: list[TagDTO]) -> TagListResponseRepresenter:
+    def list__tag_dto__to__tags_list(tag_list: list[TagDTO]) -> TagListResponseRepresenter:
         tags = []
         for tag in tag_list:
             tags.append(TagDTORepresenterMapper.tag_dto__to__tag(tag))
         return TagListResponseRepresenter(tags=tags)
+
+    @staticmethod
+    def list__tag_dto__to__list_tags(tag_list: list[TagDTO]) -> list[TagResponseRepresenter]:
+        tags = []
+        for tag in tag_list:
+            tags.append(TagDTORepresenterMapper.tag_dto__to__tag(tag))
+        return tags
