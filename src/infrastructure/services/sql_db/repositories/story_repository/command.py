@@ -1,4 +1,4 @@
-from application.mappers.story_mapper import StoryDBDTOMapper
+from application.mappers.stories_mapper import StoryDBDTOMapper
 from infrastructure.persistance.bases.repository import BaseRepository
 
 from infrastructure.services.sql_db.models.content.story import StoryDB

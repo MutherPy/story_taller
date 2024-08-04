@@ -1,5 +1,10 @@
 from api.mappers.users_mapper import UserDTORepresenterMapper
-from api.representers.response.stories.stories import StoryResponseRepresenter, StoryListResponseRepresenter
+from api.mappers.tags_mapper import TagDTORepresenterMapper
+from api.representers.response.stories.stories import (
+    StoryResponseRepresenter,
+    StoryListResponseRepresenter,
+    StoryRetrieveResponseRepresenter
+)
 from application.bases.base_mapper import BaseMapper
 from application.dto.stories.stories import StoryDTOList, StoryDTORetrieve
 
@@ -29,6 +34,14 @@ class StoryDTORepresenterMapper(BaseMapper):
         )
 
     @staticmethod
-    def story_dto_retrieve__to__story_retrieve(story_dto: StoryDTORetrieve):
-        ...
+    def story_dto_retrieve__to__story_retrieve(story_dto: StoryDTORetrieve) -> StoryRetrieveResponseRepresenter:
+        data: StoryResponseRepresenter = StoryDTORepresenterMapper.story_dto_list__to__story_list(story_dto=story_dto)
+        tags = TagDTORepresenterMapper.list__tag_dto__to__list_tags(story_dto.tags)
+        return StoryRetrieveResponseRepresenter(
+            id=data.id,
+            title=data.title,
+            author=data.author,
+            text=story_dto.text,
+            tags=tags
+        )
 

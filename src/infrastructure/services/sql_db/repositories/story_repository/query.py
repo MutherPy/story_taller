@@ -1,4 +1,4 @@
-from application.mappers.story_mapper import StoryDBDTOMapper
+from application.mappers.stories_mapper import StoryDBDTOMapper
 from infrastructure.persistance.bases.repository import BaseRepository
 from infrastructure.services.sql_db.models import TagDB
 
@@ -11,11 +11,6 @@ from infrastructure.services.sql_db.models.users.user import UserDB
 class StoryQueryRepository(BaseRepository):
 
     story_mapper: StoryDBDTOMapper
-
-    async def get_all_stories(self) -> list[StoryDTOList]:
-        stmt = select(StoryDB)
-        result = (await self.dl_connector.scalars(stmt))
-        return self.story_mapper.list__story_db__to__story_dto_list(result)
 
     async def get_user_stories(self, user_id) -> list[StoryDTOList]:
         user_stmt = select(UserDB).where(UserDB.id == user_id)
@@ -34,6 +29,6 @@ class StoryQueryRepository(BaseRepository):
         return self.story_mapper.story_db__to__story_dto_retrieve(result)
 
     async def get_stories_by_tags_ids(self, tags_ids) -> list[StoryDTOList]:
-        stmt = select(StoryDB).where(StoryDB.tags.in_(tags_ids))
+        stmt = select(StoryDB).join(StoryDB.tags).where(TagDB.id.in_(tags_ids))
         result = (await self.dl_connector.scalars(stmt))
         return self.story_mapper.list__story_db__to__story_dto_list(result)

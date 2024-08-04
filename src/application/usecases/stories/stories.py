@@ -21,3 +21,9 @@ class ListStoriesForUser(BaseUseCase):
     async def __call__(self, user_id):
         result = await self.uow.db.story_q_rep.get_user_stories(user_id=user_id)
         return result
+
+
+class RetrieveStory(BaseUseCase):
+    async def __call__(self, story_id):
+        result = await self.uow.db.story_q_rep.get_story_by_id(story_id=story_id)
+        return result
