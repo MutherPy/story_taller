@@ -29,6 +29,11 @@ class StoryQueryRepository(BaseRepository):
         result = (await self.dl_connector.scalars(stmt))
         return self.story_mapper.list__story_db__to__story_dto_list(result)
 
+    async def get_author_stories(self, user_id) -> list[StoryDTOList]:
+        stmt = select(StoryDB).where(StoryDB.author_id == user_id)
+        result = (await self.dl_connector.scalars(stmt))
+        return self.story_mapper.list__story_db__to__story_dto_list(result)
+
     async def get_story_by_id(self, story_id) -> StoryDTORetrieve:
         stmt = select(StoryDB).where(StoryDB.id == story_id)
         result = (await self.dl_connector.scalar(stmt))

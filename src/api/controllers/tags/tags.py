@@ -18,7 +18,7 @@ async def tags_list(uow=Depends(main_uow_provider)):
     return result
 
 
-@tags_router.post('/tag', responses={200: {'model': TagResponseRepresenter}, 401: {}})
+@tags_router.post('/tag', responses={201: {'model': TagResponseRepresenter}, 401: {}})
 async def tag_create(tag_name: TagCreationRequestRepresenter, uow=Depends(main_uow_provider)):
     tags_facade = TagsFacade(uow=uow)
     new_tag = (await tags_facade.create(tag_name.title))

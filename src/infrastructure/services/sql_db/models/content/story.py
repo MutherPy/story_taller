@@ -14,7 +14,7 @@ class StoryDB(BaseModel):
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid7str)
 
     author_id: Mapped[UUID] = mapped_column(ForeignKey("user.id"))
-    author = relationship("UserDB", back_populates="stories")
+    author = relationship("UserDB", back_populates="stories", lazy="selectin")
 
     title: Mapped[str] = mapped_column(nullable=False)
     text: Mapped[str] = mapped_column(nullable=False)
