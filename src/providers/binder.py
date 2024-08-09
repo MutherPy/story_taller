@@ -14,7 +14,7 @@ from providers.implementations.infrastructure_common_impl import (
     get_sql_db_provider,
     get_sql_db_uow_provider,
 )
-from providers.implementations.auth_plugs import get_current_user
+from providers.implementations.auth_impl import get_current_user
 from providers.implementations.main_providers_impl import (
     get_main_uow_provider,
 )
