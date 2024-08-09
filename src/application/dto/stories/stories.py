@@ -5,6 +5,8 @@ from uuid import UUID
 from application.dto.tags.tags import TagDTO
 from application.dto.users.users import UserDTO
 
+from datetime import datetime
+
 
 class StoryDTOList(BaseModel):
     id: UUID
@@ -15,3 +17,5 @@ class StoryDTOList(BaseModel):
 class StoryDTORetrieve(StoryDTOList):
     text: str
     tags: list[TagDTO]
+
+    creation_date: datetime
