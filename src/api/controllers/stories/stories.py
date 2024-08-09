@@ -1,3 +1,4 @@
+from typing import Optional
 from uuid import UUID
 
 from fastapi import Depends
@@ -38,13 +39,29 @@ async def my_stories(
     return result
 
 
-@stories_router.get('/story/{story_id}', responses={200: {'model': StoryRetrieveResponseRepresenter}, 401: {}})
+@stories_router.get('/story/{story_id}', responses={200: {'model': Optional[StoryRetrieveResponseRepresenter]}, 401: {}})
 async def story_retrieve(
         story_id: UUID,
         uow=Depends(main_uow_provider)
 ):
     story_facade = StoriesFacade(uow=uow)
-    story_dto: StoryDTORetrieve = (await story_facade.story_retrieve(story_id=story_id))
+    story_dto: Optional[StoryDTORetrieve] = (await story_facade.story_retrieve(story_id=story_id))
+    if not story_dto:
+        return story_dto
+    result = StoryDTORepresenterMapper.story_dto_retrieve__to__story_retrieve(story_dto)
+    return result
+
+
+@stories_router.get('/story/my/{story_id}', responses={200: {'model': Optional[StoryRetrieveResponseRepresenter]}, 401: {}})
+async def my_story_retrieve(
+        story_id: UUID,
+        user_id=Depends(current_user),
+        uow=Depends(main_uow_provider)
+):
+    story_facade = StoriesFacade(uow=uow)
+    story_dto: Optional[StoryDTORetrieve] = (await story_facade.author_story_retrieve(story_id=story_id, user_id=user_id.id))
+    if not story_dto:
+        return story_dto
     result = StoryDTORepresenterMapper.story_dto_retrieve__to__story_retrieve(story_dto)
     return result
 

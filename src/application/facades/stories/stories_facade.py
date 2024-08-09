@@ -1,6 +1,12 @@
 from application.bases.base_facade import BaseUseCaseFacade
 
-from application.usecases.stories.stories import CreateStory, ListStoriesForUser, RetrieveStory, ListStoriesForAuthor
+from application.usecases.stories.stories import (
+    CreateStory,
+    ListStoriesForUser,
+    RetrieveStory,
+    RetrieveStoryAuthor,
+    ListStoriesForAuthor
+)
 
 
 class StoriesFacade(BaseUseCaseFacade):
@@ -12,6 +18,9 @@ class StoriesFacade(BaseUseCaseFacade):
 
     async def story_retrieve(self, story_id):
         return await RetrieveStory(self.uow)(story_id)
+
+    async def author_story_retrieve(self, story_id, user_id):
+        return await RetrieveStoryAuthor(self.uow)(story_id, user_id)
 
     async def stories_for_author(self, user_id):
         return await ListStoriesForAuthor(self.uow)(user_id)

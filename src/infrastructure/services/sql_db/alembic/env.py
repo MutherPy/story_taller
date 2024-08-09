@@ -100,7 +100,8 @@ def run_migrations_online() -> None:
         try:
             asyncio.run(run_async_migrations())
             return
-        except Exception:
+        except Exception as e:
+            print(e)
             sleep(2)
             tries -= 1
 

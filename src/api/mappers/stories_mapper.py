@@ -43,6 +43,7 @@ class StoryDTORepresenterMapper(BaseMapper):
             author=data.author,
             text=story_dto.text,
             tags=tags,
-            creation_date=story_dto.creation_date
+            creation_date=story_dto.creation_date,
+            status=story_dto.status
         )
 

@@ -7,6 +7,8 @@ from datetime import datetime
 from api.representers.response.tags.tags import TagResponseRepresenter
 from api.representers.response.users.users import UserResponseRepresenter
 
+from application.choises.story import StoryStatus
+
 
 class StoryResponseRepresenter(BaseModel):
     id: UUID
@@ -18,6 +20,7 @@ class StoryRetrieveResponseRepresenter(StoryResponseRepresenter):
     text: str
     tags: list[TagResponseRepresenter]
     creation_date: datetime
+    status: StoryStatus
 
 
 class StoryListResponseRepresenter(BaseModel):

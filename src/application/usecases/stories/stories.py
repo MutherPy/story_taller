@@ -29,6 +29,12 @@ class RetrieveStory(BaseUseCase):
         return result
 
 
+class RetrieveStoryAuthor(BaseUseCase):
+    async def __call__(self, story_id, user_id):
+        result = await self.uow.db.story_q_rep.get_author_story_by_id(story_id=story_id, user_id=user_id)
+        return result
+
+
 class ListStoriesForAuthor(BaseUseCase):
     async def __call__(self, user_id):
         result = await self.uow.db.story_q_rep.get_author_stories(user_id=user_id)

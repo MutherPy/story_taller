@@ -19,7 +19,8 @@ class StoryDBDTOMapper(BaseMapper):
             author=author,
             text=story_db.text,
             tags=tags,
-            creation_date=story_db.creation_date
+            creation_date=story_db.creation_date,
+            status=story_db.status.value
         )
 
     @staticmethod
