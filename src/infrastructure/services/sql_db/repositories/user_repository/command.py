@@ -2,14 +2,14 @@ from infrastructure.persistance.bases.repository import BaseRepository
 
 from infrastructure.services.sql_db.models.users.user import UserDB
 from infrastructure.services.sql_db.models.many_to_many.users_tags import users_to_tags_association_table
-from application.mappers.auth_mapper import AuthMapper
+from application.mappers.auth_mapper import AuthUserDBDTOMapper
 from application.dto.auth.auth import RegisteredUserDTO
 from sqlalchemy import insert
 
 
 class UserCommandRepository(BaseRepository):
 
-    auth_mapper: AuthMapper
+    auth_mapper: AuthUserDBDTOMapper
 
     async def create_new_user(self, username: str, password: str, email: str) -> RegisteredUserDTO:
         userdb = await self._create(username=username, password=password, email=email)
