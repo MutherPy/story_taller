@@ -19,3 +19,7 @@ async def get_current_user(
     token_data: TokenDataDTO = IdentityProvider.validate_token(creds.credentials)
     auth_user_dto: Optional[AuthUserDTO] = await db_uow.user_q_rep.retrieve_id_by_username(username=token_data.username)
     return auth_user_dto
+
+#
+# class AuthorizationController:
+#     def __init__(self, permissions: list):

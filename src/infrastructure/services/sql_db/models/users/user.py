@@ -1,3 +1,5 @@
+from sqlalchemy import ForeignKey
+
 from infrastructure.services.sql_db.models.base_model import BaseModel
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from uuid import UUID
@@ -26,3 +28,6 @@ class UserDB(BaseModel):
         back_populates="users",
         lazy="selectin"  # https://stackoverflow.com/questions/74252768/missinggreenlet-greenlet-spawn-has-not-been-called
     )
+
+    permissions_group_id: Mapped[int] = mapped_column(ForeignKey("permission_group.id"), nullable=True, default=None)
+    permissions_group = relationship("PermissionGroupDB")
