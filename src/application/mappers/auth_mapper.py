@@ -4,7 +4,7 @@ from application.dto.auth.auth import LoginUserDTO, RegisteredUserDTO, AuthUserD
 from infrastructure.services.sql_db.models.users.user import UserDB
 
 
-class AuthMapper(BaseMapper):
+class AuthUserDBDTOMapper(BaseMapper):
     @staticmethod
     def user_db__to__login_user_dto(userdb: UserDB) -> LoginUserDTO:
         return LoginUserDTO(

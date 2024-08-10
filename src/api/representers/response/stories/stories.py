@@ -5,7 +5,7 @@ from datetime import datetime
 
 
 from api.representers.response.tags.tags import TagResponseRepresenter
-from api.representers.response.users.users import UserResponseRepresenter
+from api.representers.response.users.users import UserAuthorResponseRepresenter
 
 from application.choises.story import StoryStatus
 
@@ -13,7 +13,7 @@ from application.choises.story import StoryStatus
 class StoryResponseRepresenter(BaseModel):
     id: UUID
     title: str
-    author: UserResponseRepresenter
+    author: UserAuthorResponseRepresenter
 
 
 class StoryRetrieveResponseRepresenter(StoryResponseRepresenter):
